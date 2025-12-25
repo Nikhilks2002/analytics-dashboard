@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/supabaseclient.ts","./src/types.ts","./src/api/api.ts","./src/components/donutchart.tsx","./src/components/inputcard.tsx","./src/components/wavechart.tsx","./src/pages/dashboard.tsx","./src/pages/payment.tsx","./src/pages/registration.tsx","./src/pages/signin.tsx"],"version":"5.9.3"}

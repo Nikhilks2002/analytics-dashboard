@@ -1,0 +1,536 @@
+/* ===== Global Reset ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  background: #0b0f1a;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  color: #e6e8ef;
+}
+
+/* ===== Layout ===== */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* ===== Sidebar (Inputs) ===== */
+.sidebar {
+  width: 25%;
+  min-width: 280px;
+  background: linear-gradient(180deg, #0f1424, #0b0f1a);
+  padding: 24px 20px;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebar h3 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  color: #9aa4ff;
+}
+
+/* Input Groups */
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.input-row label {
+  font-size: 12px;
+  color: #b7bdd6;
+  flex: 1;
+}
+
+/* Inputs */
+.input-row input {
+  width: 70px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #ffffff;
+  outline: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.input-row input:focus {
+  border-color: #6cf5c2;
+  background: rgba(108, 245, 194, 0.08);
+}
+
+/* ===== Charts Section ===== */
+.charts-section {
+  width: 75%;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+/* ===== Chart Cards ===== */
+.chart-card {
+  background: radial-gradient(
+      120% 120% at 10% 10%,
+      rgba(108, 245, 194, 0.08),
+      transparent
+    ),
+    #0f1424;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: visible;
+}
+
+.chart-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+/* ===== Time Filter Buttons ===== */
+.time-filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.time-filter button {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: #cfd4ff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.time-filter button:hover {
+  background: rgba(108, 245, 194, 0.12);
+  color: #ffffff;
+}
+
+.time-filter button.active {
+  background: linear-gradient(135deg, #6cf5c2, #5da9ff);
+  color: #081312;
+  font-weight: 600;
+  border: none;
+}
+
+/* ===== Scrollbars (Minimal) ===== */
+.sidebar::-webkit-scrollbar,
+.charts-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.charts-section::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.charts-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+  }
+
+  .charts-section {
+    width: 100%;
+  }
+}.auth-container,
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+  margin: auto;
+}
+
+.avatar-fallback {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6cf5c2, #5da9ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #081312;
+}
+
+.fade-in {
+  animation: fade 0.8s ease forwards;
+}
+
+.slide-up {
+  animation: slide 0.6s ease forwards;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animated-label {
+  opacity: 0;
+  transform: translateY(6px) skewX(-6deg);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #e5e7eb;
+  transition:
+    opacity 1.3s ease,
+    transform 1.3s ease;
+}
+
+.animated-label.show {
+  opacity: 1;
+  transform: translateY(0) skewX(-10deg);
+}
+body {
+  background: #0b0f1a;
+  color: white;
+  font-family: Arial;
+}
+
+.auth-page {
+  max-width: 400px;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input, button {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+button {
+  background: #22d3ee;
+  cursor: pointer;
+}
+.plan-card ul {
+  text-align: left;
+  padding-left: 15px;
+  font-size: 14px;
+}
+
+.plan-card .price {
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+
+.loader {
+  width: 45px;
+  height: 45px;
+  border: 4px solid #333;
+  border-top: 4px solid #22d3ee;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.dashboard-header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn {
+  background: #ef4444;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-avatar.fallback {
+  background: #22d3ee;
+  color: #0f172a;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-name {
+  color: white;
+  font-weight: 500;
+}
+
+.dashboard-container {
+  display: flex;
+  margin-top: 64px; /* space for fixed header */
+}
+#plans-grid{
+  border: 2px soled grey;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+.futuristic-heading {
+  text-align: center;
+  font-size: 2rem;
+  color: #00fff7;
+  text-shadow: 0 0 10px #00fff7, 0 0 20px #0ff;
+  margin-bottom: 30px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.plans-grid.futuristic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.plan-card.futuristic-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,255,255,0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  padding: 25px 20px;
+  cursor: pointer;
+  position: relative;
+  color: #00fff7;
+  transition: all 0.4s ease;
+  min-height: 140px;
+  box-shadow: 0 0 15px rgba(0,255,255,0.2), 0 0 30px rgba(0,255,255,0.1);
+}
+
+.plan-card.futuristic-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(0,255,255,0.5), 0 0 60px rgba(0,255,255,0.2);
+}
+
+.plan-card.active {
+  border: 2px solid #00fff7;
+}
+
+.plan-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.plan-card .price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #00ffe5;
+}
+
+.benefits-list.futuristic-benefits {
+  margin-top: 10px;
+  padding-left: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+  color: #00fff7;
+}
+
+.futuristic-btn {
+  background: linear-gradient(90deg, #00fff7, #00c3ff);
+  color: #000;
+  padding: 14px 28px;
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  margin-top: 20px;
+  box-shadow: 0 0 15px #00fff7, 0 0 30px #00c3ff;
+  transition: all 0.3s ease;
+}
+
+.futuristic-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px #00fff7, 0 0 50px #00c3ff;
+}
+
+.futuristic-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,255,255,0.3);
+  color: #00fff7;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.loader.futuristic-loader {
+  border: 6px solid rgba(0,255,255,0.1);
+  border-top: 6px solid #00fff7;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.futuristic-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,255,255,0.3);
+  border-radius: 20px;
+  padding: 30px 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 15px rgba(0,255,255,0.2), 0 0 30px rgba(0,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.futuristic-form:hover {
+  box-shadow: 0 0 30px rgba(0,255,255,0.5), 0 0 60px rgba(0,255,255,0.2);
+}
+
+.futuristic-link {
+  text-align: center;
+  color: #00fff7;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: 0.3s;
+}
+
+.futuristic-link:hover {
+  color: #00c3ff;
+  text-decoration: underline;
+}
+
+.change-toast {
+  position: fixed;
+  top: 20px;
+  right: -400px;
+  background: linear-gradient(90deg, #22d3ee, #6366f1, #f472b6);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  animation: slideIn 0.5s forwards, fadeOut 0.5s 1.5s forwards;
+  z-index: 999;
+}
+
+@keyframes slideIn {
+  to { right: 20px; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; right: 20px; }
+}
+.change-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #22d3ee, #3b82f6); /* clean gradient */
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  z-index: 9999;
+  cursor: pointer;
+  transform: translateX(200%);
+  animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,24 @@
+.donut-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover animation on donut slices */
+.recharts-sector {
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.recharts-sector:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.35));
+}
+
+/* Center animated number */
+.donut-center-text {
+  fill: #ffffff;
+  font-size: 45px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 1px;
+}
