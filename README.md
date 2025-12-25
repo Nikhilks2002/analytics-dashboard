@@ -1,27 +1,17 @@
 # 📊 Analytics Dashboard
 
-A modern, full-stack **Analytics Dashboard** built with **FastAPI** (backend) and **React + TypeScript + Vite** (frontend).
-The application provides real-time data visualization using interactive charts and a clean, scalable architecture.
+A modern, interactive **analytics dashboard** built with **FastAPI** for the backend and **React + TypeScript + Vite** for the frontend.
+Visualize data with dynamic charts, input panels, and real-time updates.
 
 ---
 
-## 🚀 Tech Stack
+## 🚀 Features
 
-### Backend
-
-* **FastAPI**
-* **SQLAlchemy**
-* **Pydantic**
-* **Uvicorn**
-* Environment configuration with **python-dotenv**
-
-### Frontend
-
-* **React**
-* **TypeScript**
-* **Vite**
-* **ESLint**
-* Charting support (e.g., Recharts or similar)
+* Backend with **FastAPI**
+* Frontend with **React**, **TypeScript**, and **Vite**
+* Dynamic charts using **Recharts**
+* Input panels for live data updates
+* Fully containerized and easy to run locally
 
 ---
 
@@ -29,99 +19,120 @@ The application provides real-time data visualization using interactive charts a
 
 ```
 analytics-dashboard/
-│
 ├── backend/
-│   ├── .env                    # Environment variables (DB, secrets)
-│   ├── main.py                 # FastAPI app entry point
-│   ├── database.py             # Database connection setup
-│   ├── models.py               # SQLAlchemy models
-│   ├── schemas.py              # Pydantic schemas
-│   ├── crud.py                 # Database CRUD operations
-│   └── requirements.txt        # Backend dependencies
-│
+│   ├── main.py
+│   ├── database.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── crud.py
+│   ├── test_db_connection.py
+│   ├── requirements.txt
+│   └── .env
 ├── frontend/
-│   ├── public/                 # Static assets
-│   ├── src/                    # React source code
-│   │   ├── main.tsx            # React entry point
-│   │   ├── App.tsx             # Root component
-│   │   └── api/                # API calls to backend (recommended)
-│   ├── index.html              # HTML entry
-│   ├── package.json            # Frontend dependencies & scripts
-│   ├── tsconfig.json           # TypeScript config
-│   └── vite.config.ts          # Vite configuration
-│
-└── README.md                   # Project documentation
-
+│   ├── public/
+│   ├── src/
+│   │   ├── api/
+│   │   │   ├── api.js
+│   │   │   └── api.ts
+│   │   ├── components/
+│   │   │   ├── DonutChart.js
+│   │   │   ├── DonutChart.tsx
+│   │   │   ├── InputCard.js
+│   │   │   ├── InputCard.tsx
+│   │   │   ├── WaveChart.js
+│   │   │   └── WaveChart.tsx
+│   │   ├── pages/
+│   │   ├── App.js
+│   │   ├── App.tsx
+│   │   ├── App.css
+│   │   ├── index.jsx
+│   │   ├── index.css
+│   │   ├── main.js
+│   │   ├── main.tsx
+│   │   ├── supabaseClient.js
+│   │   ├── supabaseClient.ts
+│   │   ├── types.js
+│   │   └── types.ts
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   └── index.html
+├── .gitignore
+└── README.md
 ```
 
 ---
 
 ## ⚙️ Backend Setup (FastAPI)
 
-1. Navigate to the backend directory:
+1. Navigate to the backend folder:
 
 ```bash
 cd backend
 ```
 
-2. Create and activate a virtual environment:
+2. Create a virtual environment:
 
 ```bash
 python -m venv venv
 ```
 
-**Windows**
+3. Activate the virtual environment:
+
+**Windows (PowerShell):**
 
 ```bash
-venv\Scripts\activate
+.\venv\Scripts\activate
 ```
 
-**macOS / Linux**
+**macOS / Linux:**
 
 ```bash
 source venv/bin/activate
 ```
 
-3. Install dependencies:
+4. Install dependencies:
+
+```bash
+pip install fastapi uvicorn python-dotenv sqlalchemy
+```
+
+> Or if you have `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Configure environment variables:
+5. Configure environment variables in `.env`:
 
-* Create or edit the `.env` file in the `backend` folder
-* Add database and environment settings as needed
-
-5. Run the FastAPI server:
-
-```bash
-uvicorn main:app --reload
+```
+DATABASE_URL=your_database_url
+OTHER_ENV_VAR=value
 ```
 
-6. Open API documentation:
+6. Start the FastAPI server:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+7. Open API documentation in your browser:
 
 ```
 http://127.0.0.1:8000/docs
 ```
 
----
+8. Optional: Test database connection:
 
-## 🧪 Backend Files Overview
-
-* `main.py` – FastAPI app entry point
-* `database.py` – Database connection setup
-* `models.py` – SQLAlchemy models
-* `schemas.py` – Pydantic schemas
-* `crud.py` – Database operations (CRUD logic)
-* `test_db_connection.py` – Database connection test
-* `.env` – Environment variables
+```bash
+python test_db_connection.py
+```
 
 ---
 
 ## 🎨 Frontend Setup (React + Vite)
 
-1. Navigate to the frontend directory:
+1. Navigate to the frontend folder:
 
 ```bash
 cd frontend
@@ -139,7 +150,7 @@ npm install
 npm run dev
 ```
 
-4. Open the app:
+4. Open the app in your browser:
 
 ```
 http://localhost:5173
@@ -147,31 +158,34 @@ http://localhost:5173
 
 ---
 
-## 📌 Frontend Notes
-
-* Built with **TypeScript** for type safety
-* Uses **Vite** for fast development and builds
-* ESLint configured for clean code
-* Fetches live data from the FastAPI backend
-
----
-
 ## 🔗 Backend ↔ Frontend Integration
 
-* Ensure the backend server is running before starting the frontend
-* API requests are made from React to FastAPI
-* Update API base URLs if needed for deployment
+* Ensure the **backend server** is running before starting the frontend.
+* API requests in React call FastAPI endpoints.
+* Update API base URLs in `src/api/api.js` or `src/api/api.ts` if deploying to another environment.
 
 ---
 
 ## 📝 Notes
 
-* Modify `.env` for database or environment-specific settings
-* Project is structured for scalability and clean separation of concerns
-* Suitable for dashboards, admin panels, and analytics systems
+* Always activate the virtual environment before running backend commands.
+* `.env` stores sensitive environment variables like database URLs.
+* Frontend uses TypeScript for type safety and Vite for fast builds.
+* Project is structured for scalability, maintainability, and real-time analytics.
 
 ---
 
-## 📄 License
+## 💻 Commands Summary
 
-This project is licensed under the **MIT License**.
+| Task                              | Command (Windows / macOS-Linux)                        |
+| --------------------------------- | ------------------------------------------------------ |
+| Create backend venv               | `python -m venv venv`                                  |
+| Activate backend venv             | `.\venv\Scripts\activate` / `source venv/bin/activate` |
+| Install backend deps              | `pip install fastapi uvicorn python-dotenv sqlalchemy` |
+| Install backend from requirements | `pip install -r requirements.txt`                      |
+| Start backend server              | `uvicorn main:app --host 0.0.0.0 --port 8000 --reload` |
+| Test DB connection                | `python test_db_connection.py`                         |
+| Install frontend deps             | `npm install`                                          |
+| Start frontend dev server         | `npm run dev`                                          |
+| Open frontend app                 | `http://localhost:5173`                                |
+---
